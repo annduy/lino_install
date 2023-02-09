@@ -89,15 +89,15 @@ build-essential \
 python-gudev
 
 sudo easy_install pip
-sudo python2.7 -m pip install -U platformio
-sudo rm -rf $HOME/.platformio/
+#sudo python2.7 -m pip install -U platformio
+#sudo rm -rf $HOME/.platformio/
 
 source /opt/ros/$ROSDISTRO/setup.bash
 
 cd $HOME
-mkdir -p linorobot_ws/src
-cd $HOME/linorobot_ws/src
-catkin_init_workspace
+#mkdir -p linorobot_ws/src
+#cd $HOME/linorobot_ws/src
+#catkin_init_workspace
 
 sudo apt-get install -y \
 ros-$ROSDISTRO-roslint \
@@ -122,7 +122,8 @@ if [[ "$3" == "test" ]]
         ros-$ROSDISTRO-depthimage-to-laserscan \
         ros-$ROSDISTRO-teb-local-planner 
 
-        cd $HOME/linorobot_ws/src
+        #cd $HOME/linorobot_ws/src
+        cd $HOME/catkin_ws/src
         git clone https://github.com/EAIBOT/ydlidar.git
 
 else
@@ -163,7 +164,8 @@ else
 
     elif [[ "$SENSOR" == "ydlidar" ]]
         then
-            cd $HOME/linorobot_ws/src
+            #cd $HOME/linorobot_ws/src
+            cd $HOME/catkin_ws/src
             git clone https://github.com/EAIBOT/ydlidar.git
     fi
 
@@ -174,26 +176,31 @@ else
 fi
 
 cd $HOME/linorobot_ws/src
+cd $HOME/catkin_ws/src
 git clone https://github.com/linorobot/linorobot.git
 git clone https://github.com/linorobot/imu_calib.git
 git clone https://github.com/linorobot/lino_pid.git
 git clone https://github.com/linorobot/lino_udev.git
 git clone https://github.com/linorobot/lino_msgs.git
 
-cd $HOME/linorobot_ws/src/linorobot
+#cd $HOME/linorobot_ws/src/linorobot
+cd $HOME/catkin_ws/src/linorobot
 TRAVIS_BRANCH="echo $TRAVIS_BRANCH"
 if [ "$TRAVIS_BRANCH" = "devel" ]; then git checkout devel; fi
 
-cd $HOME/linorobot_ws/src/linorobot/teensy/firmware
+#cd $HOME/linorobot_ws/src/linorobot/teensy/firmware
+cd $HOME/catkin_ws/src/linorobot/teensy/firmware
 export PLATFORMIO_CI_SRC=$PWD/src/firmware.ino
 platformio ci --project-conf=./platformio.ini --lib="./lib/ros_lib" --lib="./lib/config"  --lib="./lib/motor"  --lib="./lib/kinematics"  --lib="./lib/pid"  --lib="./lib/imu" --lib="./lib/encoder"
 
-echo "source $HOME/linorobot_ws/devel/setup.bash" >> $HOME/.bashrc
+#echo "source $HOME/linorobot_ws/devel/setup.bash" >> $HOME/.bashrc
+echo "source $HOME/catkin_ws/devel/setup.bash" >> $HOME/.bashrc
 echo "export LINOLIDAR=$SENSOR" >> $HOME/.bashrc
 echo "export LINOBASE=$BASE" >> $HOME/.bashrc
 source $HOME/.bashrc
 
-cd $HOME/linorobot_ws
+#cd $HOME/linorobot_ws
+cd $HOME/catkin_ws
 catkin_make --pkg lino_msgs
 catkin_make
 
