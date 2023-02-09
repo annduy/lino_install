@@ -95,6 +95,10 @@ python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio
 
 source /opt/ros/$ROSDISTRO/setup.bash
 
+cd $HOME/catkin_ws
+rm -rf build devel
+cd $HOME/catkin_ws/src
+rm -rf imu* lino*
 cd $HOME
 #mkdir -p linorobot_ws/src
 #cd $HOME/linorobot_ws/src
