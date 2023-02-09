@@ -90,6 +90,7 @@ build-essential \
 
 sudo easy_install pip
 python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+pip install -U platformio
 #sudo python2.7 -m pip install -U platformio
 #sudo rm -rf $HOME/.platformio/
 
