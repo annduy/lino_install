@@ -175,7 +175,7 @@ else
     fi
 fi
 
-cd $HOME/linorobot_ws/src
+#cd $HOME/linorobot_ws/src
 cd $HOME/catkin_ws/src
 git clone https://github.com/linorobot/linorobot.git
 git clone https://github.com/linorobot/imu_calib.git
